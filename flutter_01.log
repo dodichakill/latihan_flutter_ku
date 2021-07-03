@@ -1,0 +1,81 @@
+Flutter crash report.
+Please report a bug at https://github.com/flutter/flutter/issues.
+
+## command
+
+flutter create --ios-language swift --android-language kotlin --template module --overwrite .
+
+## exception
+
+FileSystemException: FileSystemException: Cannot copy file to 'C:\Users\LENOVO\Desktop\latihanku\latihan Flutter\latihan_ku\latihan_flutter_ku\.android\app\src\main\res\mipmap-hdpi\ic_launcher.png', path = 'C:\Development\flutter\packages\flutter_tools\templates\module\android\host_app_common\app.tmpl\src\main\res\mipmap-hdpi\ic_launcher.png' (OS Error: Access is denied.
+, errno = 5)
+
+```
+#0      _File.throwIfError (dart:io/file_impl.dart:635:7)
+#1      _File.copySync (dart:io/file_impl.dart:340:5)
+#2      ForwardingFile.copySync (package:file/src/forwarding/forwarding_file.dart:30:50)
+#3      ForwardingFile.copySync (package:file/src/forwarding/forwarding_file.dart:30:50)
+#4      Template.render.<anonymous closure> (package:flutter_tools/src/template.dart:267:18)
+#5      _LinkedHashMapMixin.forEach (dart:collection-patch/compact_hash.dart:377:8)
+#6      Template.render (package:flutter_tools/src/template.dart:190:24)
+#7      AndroidProject._overwriteFromTemplate (package:flutter_tools/src/project.dart:832:14)
+<asynchronous suspension>
+#8      AndroidProject.ensureReadyForPlatformSpecificTooling (package:flutter_tools/src/project.dart:791:15)
+<asynchronous suspension>
+#9      FlutterProject.ensureReadyForPlatformSpecificTooling (package:flutter_tools/src/project.dart:244:21)
+<asynchronous suspension>
+#10     CreateCommand._generateModule (package:flutter_tools/src/commands/create.dart:550:21)
+<asynchronous suspension>
+#11     CreateCommand.runCommand (package:flutter_tools/src/commands/create.dart:439:37)
+#12     _rootRunUnary (dart:async/zone.dart:1198:47)
+#13     _CustomZone.runUnary (dart:async/zone.dart:1100:19)
+#14     _FutureListener.handleValue (dart:async/future_impl.dart:143:18)
+#15     Future._propagateToListeners.handleValueCallback (dart:async/future_impl.dart:696:45)
+#16     Future._propagateToListeners (dart:async/future_impl.dart:725:32)
+#17     Future._completeWithValue (dart:async/future_impl.dart:529:5)
+#18     Future._asyncCompleteWithValue.<anonymous closure> (dart:async/future_impl.dart:567:7)
+#19     _rootRun (dart:async/zone.dart:1190:13)
+#20     _CustomZone.run (dart:async/zone.dart:1093:19)
+#21     _CustomZone.runGuarded (dart:async/zone.dart:997:7)
+#22     _CustomZone.bindCallbackGuarded.<anonymous closure> (dart:async/zone.dart:1037:23)
+#23     _microtaskLoop (dart:async/schedule_microtask.dart:41:21)
+#24     _startMicrotaskLoop (dart:async/schedule_microtask.dart:50:5)
+#25     _runPendingImmediateCallback (dart:isolate-patch/isolate_patch.dart:118:13)
+#26     _Timer._runTimers (dart:isolate-patch/timer_impl.dart:404:11)
+#27     _Timer._handleMessage (dart:isolate-patch/timer_impl.dart:428:5)
+#28     _RawReceivePortImpl._handleMessage (dart:isolate-patch/isolate_patch.dart:168:12)
+```
+
+## flutter doctor
+
+```
+[✓] Flutter (Channel stable, 1.22.5, on Microsoft Windows [Version 10.0.18363.1556], locale en-ID)
+    • Flutter version 1.22.5 at C:\Development\flutter
+    • Framework revision 7891006299 (7 months ago), 2020-12-10 11:54:40 -0800
+    • Engine revision ae90085a84
+    • Dart version 2.10.4
+
+[✗] Android toolchain - develop for Android devices
+    ✗ Unable to locate Android SDK.
+      Install Android Studio from: https://developer.android.com/studio/index.html
+      On first launch it will assist you in installing the Android SDK components.
+      (or visit https://flutter.dev/docs/get-started/install/windows#android-setup for detailed instructions).
+      If the Android SDK has been installed to a custom location, set ANDROID_SDK_ROOT to that location.
+      You may also want to add it to your PATH environment variable.
+
+
+[!] Android Studio (version 4.1.0)
+    • Android Studio at C:\Program Files\Android\Android Studio
+    ✗ Flutter plugin not installed; this adds Flutter specific functionality.
+    ✗ Dart plugin not installed; this adds Dart specific functionality.
+    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b01)
+
+[✓] VS Code, 64-bit edition (version 1.56.2)
+    • VS Code at C:\Program Files\Microsoft VS Code
+    • Flutter extension version 3.23.0
+
+[!] Connected device
+    ! No devices available
+
+! Doctor found issues in 3 categories.
+```
