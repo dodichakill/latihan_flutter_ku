@@ -27,5 +27,3 @@ class MyApp extends StatelessWidget {
 // widget Scaffold() merupakan tampilan dasar aplikasi android yang memiliki setidaknya ada 2 bagian utama appbar dan body
 // appbar untuk aplikasi bar
 // body untuk body applikasi
-
-
