@@ -1,4 +1,4 @@
-// latihan 3 - row dan column
+// latihan 4 - Container Widget
 
 import 'package:flutter/material.dart';
 
@@ -10,84 +10,88 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
           appBar: AppBar(
-            title: Text('latihan 3 - Row & Column'),
+            title: Text('latihan 4 - Container Widget'),
           ),
-          // body: Row(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: <Widget>[
-          //     Text('teks 1'),
-          //     Text('teks 2'),
-          //     Text('teks 3'),
-          //   ],
+          // body: Container(
+          //   color: Colors.purple,
+          //   margin: EdgeInsets.all(10),
+          //   padding: EdgeInsets.only(bottom: 10, top: 10),
+          //   child: Container(
+          //     color: Colors.blue,
+          //     margin: EdgeInsets.fromLTRB(10, 20, 30, 40),
+          //   ),
           // )),
 
-          // body: Column(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: <Widget>[
-          //     Text('teks 1'),
-          //     Text('teks 2'),
-          //     Text('teks 3'),
-          //   ],
+          // body: Container(
+          //   color: Colors.indigo,
+          //   margin: EdgeInsets.all(10),
+          //   padding: EdgeInsets.only(bottom: 10, top: 10),
+          //   child: Container(
+          //     // memberikan gradasi dari kiri ke kanan
+          //     decoration: BoxDecoration(
+          //         gradient: LinearGradient(colors: <Color>[
+          //       Colors.yellow,
+          //       Colors.green,
+          //       Colors.lightBlue,
+          //       Colors.purple
+          //     ])),
+          //     margin: EdgeInsets.only(top: 10, bottom: 10),
+          //   ),
           // )),
 
-          // body: Column(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: <Widget>[
-          //     Text('teks 1'),
-          //     Text('teks 2'),
-          //     Text('teks 3'),
-          //     Row(
-          //       children: <Widget>[
-          //         Text('teks 4'),
-          //         Text('teks 5'),
-          //         Text('teks 6'),
-          //       ],
-          //     )
-          //   ],
+          // body: Container(
+          //   color: Colors.indigo,
+          //   margin: EdgeInsets.all(10),
+          //   padding: EdgeInsets.only(bottom: 10, top: 10),
+          //   child: Container(
+          //     // memberikan gradasi dari atas kiri ke bawah kanan
+          //     decoration: BoxDecoration(
+          //         gradient: LinearGradient(
+          //             begin: Alignment.topLeft,
+          //             end: Alignment.bottomRight,
+          //             colors: <Color>[
+          //           Colors.yellow,
+          //           Colors.green,
+          //           Colors.lightBlue,
+          //           Colors.purple
+          //         ])),
+          //     margin: EdgeInsets.only(top: 10, bottom: 10),
+          //   ),
           // )),
 
-          // body: Row(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: <Widget>[
-          //     Text('teks 1'),
-          //     Text('teks 2'),
-          //     Text('teks 3'),
-          //     Row(
-          //       children: <Widget>[
-          //         Text('teks 4'),
-          //         Text('teks 5'),
-          //         Text('teks 6'),
-          //       ],
-          //     )
-          //   ],
-          // )),
-
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text('teks 1'),
-              Text('teks 2'),
-              Text('teks 3'),
-              Row(
-                children: <Widget>[
-                  Text('teks 4'),
-                  Text('teks 5'),
-                  Text('teks 6'),
-                ],
-              )
-            ],
+          body: Container(
+            color: Colors.indigo,
+            margin: EdgeInsets.all(10),
+            padding: EdgeInsets.only(bottom: 10, top: 10),
+            child: Container(
+              // memberikan border radius
+              decoration: BoxDecoration(
+                  color: Colors.blue, borderRadius: BorderRadius.circular(50)),
+              margin: EdgeInsets.all(10),
+            ),
           )),
-
     );
   }
 }
 
 // penjelasan singkat
 // ----------------
-// children:  <Widget>[] berfungsi untuk menampilkan beberapa widget sekaligus
-// widget Column berfungsi untuk mengatur tataletak widget yang ada dicolumn disusun secara kebawah (vertikal)
-// widget Row berfungsi untuk mengatur tataletak widget yang ada dirow disusun secara kesamping (horizontal)
-// widget column dan row memiliki property:
-// - mainAxisAlignment: yang bisa memiliki value MainAxisAlignment.center yang jika dipakai dalam row maka akan menengahkan letaknya secara horizontal sedangkan column akan menengahkan secara vertikal
-// - crossAxisAlignment: yang bisa memiliki value CrossAxisAlignment.start yang jika dipakai dalam column akan ke kiri secara vertikal
+// Widget Container merupakan widget pembungkus
+// widget ini mempunyai property seperti berikut:
+// - color
+// berfungsi untuk memberikan warna kepada container, dan bisa bernilai Colors.blue yang artinya container berwarna biru
+// - margin
+// untuk memberikan jarak container ke-luar container, bisa bernilai: EdgeInsets.all(10) yang berarti semua sisinya container memiliki jarak ke-luar 10, EdgeInsets.only(bottom: 10, top: 10) yang berarti hanya sisi bagian bawah dan atasnya container memiliki jarak ke-luar 10, EdgeInsets.fromLTRB(10, 20, 30, 40) artinya dari sisi kiri memiliki jarak ke-luar 10, atas 20, kanan 30, bawah 40
+// - padding
+// untuk memberikan jarak container ke-dalam container, bisa bernilai: EdgeInsets.all(10) yang berarti semua sisinya container memiliki jarak ke-dalam 10, EdgeInsets.only(bottom: 10, top: 10) yang berarti hanya sisi bagian bawah dan atasnya container memiliki jarak ke-dalam 10, EdgeInsets.fromLTRB(10, 20, 30, 40) artinya dari sisi kiri memiliki jarak ke-dalam 10, atas 20, kanan 30, bawah 40
+// - child
+// yang berfungsi untuk membuat/menambahkan turunan widget lainnya kedalam container
+// - decoration
+// berfungsi untuk memberikan dekorasi/styling pada container, bisa berisi widget BoxDecoration yang bernilai gradient: LinearGradient(colors: <Color>[Colors.yellow, Colors.red, Colors.green]) yang berarti container tersebut memiliki gradasi warna dari kiri kuning, dari tengah merah dan dari kanan hijau
+
+
+
+
+
+
+
