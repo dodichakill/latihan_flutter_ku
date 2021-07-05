@@ -1,63 +1,95 @@
-// latihan 7 - TextStyle
+// Latihan 8 - List & ListView
 
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  // dibawah ini kita menggunakan List untuk menampung datanya
+  List<Widget> widgets = [];
+  int counter = 1;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Latihan 7 - TextStyle'),
+          title: Text('Latihan 8 - List & ListView'),
         ),
-        body: Center(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+        // dibawah ini kita menggunakan Column dan akan error bila data yang ditampilkan melebihi ukuran layar
+
+        // body: Column(
+        //   children: <Widget>[
+        //     Row(
+        //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+        //       children: <Widget>[
+        //         ElevatedButton(
+        //             onPressed: () => setState(() {
+        //                   widgets.add(Text(
+        //                     'data ke - ' + counter.toString(),
+        //                     style: TextStyle(fontSize: 35),
+        //                   ));
+        //                   counter++;
+        //                 }),
+        //             child: Text('tambah data')),
+        //         ElevatedButton(
+        //             onPressed: () => setState(() {
+        //                   widgets
+        //                       .removeLast(); // untuk menghapus widget terakhir
+        //                   counter--;
+        //                 }),
+        //             child: Text('kurangi data'))
+        //       ],
+        //     ),
+        //     Column(
+        //       crossAxisAlignment: CrossAxisAlignment.start,
+        //       children: widgets,
+        //     )
+        //   ],
+        // ),
+
+        // dibawah ini kita menggunakan ListView dan tidak akan terjadi error bila data yang ditampilkan melebihi ukuran layar melainkan akan menjadi bisa discroll
+
+        body: ListView(
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                Text(
-                  'ini text dengan font poppins regular',
-                  style: TextStyle(
-                    fontFamily: "Poppins",
-                    fontSize: 20,
-                    decoration: TextDecoration.overline,
-                    decorationColor: Colors.green,
-                    decorationThickness: 4,
-                    decorationStyle: TextDecorationStyle.dashed,
-                  ),
-                ),
-                Text(
-                  'ini text dengan font poppins italic',
-                  style: TextStyle(
-                    fontFamily: "Poppins",
-                    fontSize: 20,
-                    decoration: TextDecoration.lineThrough,
-                    decorationColor: Colors.green,
-                    decorationThickness: 4,
-                    fontStyle: FontStyle.italic,
-                    decorationStyle: TextDecorationStyle.dotted,
-                  ),
-                ),
-                Text(
-                  'ini text dengan font poppins bold',
-                  style: TextStyle(
-                    fontFamily: "Poppins",
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    decoration: TextDecoration.underline,
-                    decorationColor: Colors.green,
-                    decorationThickness: 4,
-                    decorationStyle: TextDecorationStyle.double,
-                  ),
-                ),
-              ]),
+                ElevatedButton(
+                    onPressed: () => setState(() {
+                          widgets.add(Text(
+                            'data ke - ' + counter.toString(),
+                            style: TextStyle(fontSize: 35),
+                          ));
+                          counter++;
+                        }),
+                    child: Text('tambah data')),
+                ElevatedButton(
+                    onPressed: () => setState(() {
+                          widgets
+                              .removeLast(); // untuk menghapus widget terakhir
+                          counter--;
+                        }),
+                    child: Text('kurangi data'))
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: widgets,
+            )
+          ],
         ),
       ),
     );
   }
 }
+
 // penjelasan singkat
 // ----------------
-// TextStyle merupakan widget yang berguna untuk styling text
-// jika kita ingin mencustom fonts sendiri kita bisa menambahkannya fontnya di folder/buat folder fonts lalu masukan font yang udah ditentukan/didownload ke dalam folder fonts, lalu kita daftarkan font tadi pada pubspec.yaml (lihat saja pada file pubspec.yaml), setelah didaftarkan fonts tersebut bisa digunakan dengan menggunakan widget TextStyle (dan beberapa styling) seperti contoh diatas.
+// gunakan List untuk menampung beberapa data sekaligus
+// gunakan ListView dari pada column/row untuk menghindari terjadinya error ketika data yang ditampilkan melebihi batas layar
