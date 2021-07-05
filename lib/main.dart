@@ -1,6 +1,7 @@
-// Latihan 8 - List & ListView
+// Latihan 9 - AnimatedContainer & GestureDetector
 
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() => runApp(MyApp());
 
@@ -10,79 +11,53 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // dibawah ini kita menggunakan List untuk menampung datanya
-  List<Widget> widgets = [];
-  int counter = 1;
+  // kita akan membuat sebuah animatedContainer ditengah2 layar yang nanti jika diklik nanti akan berubah warna dan ukuran panjang, tingginya secara random.
+
+  Random random = Random();
+  String pesan = 'Pesan dinamis';
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Latihan 8 - List & ListView'),
+          title: Text(
+            'Latihan 9 - AnimatedContainer & GestureDetector',
+            style: TextStyle(fontSize: 13.5),
+          ),
         ),
-        // dibawah ini kita menggunakan Column dan akan error bila data yang ditampilkan melebihi ukuran layar
-
-        // body: Column(
-        //   children: <Widget>[
-        //     Row(
-        //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //       children: <Widget>[
-        //         ElevatedButton(
-        //             onPressed: () => setState(() {
-        //                   widgets.add(Text(
-        //                     'data ke - ' + counter.toString(),
-        //                     style: TextStyle(fontSize: 35),
-        //                   ));
-        //                   counter++;
-        //                 }),
-        //             child: Text('tambah data')),
-        //         ElevatedButton(
-        //             onPressed: () => setState(() {
-        //                   widgets
-        //                       .removeLast(); // untuk menghapus widget terakhir
-        //                   counter--;
-        //                 }),
-        //             child: Text('kurangi data'))
-        //       ],
-        //     ),
-        //     Column(
-        //       crossAxisAlignment: CrossAxisAlignment.start,
-        //       children: widgets,
-        //     )
-        //   ],
-        // ),
-
-        // dibawah ini kita menggunakan ListView dan tidak akan terjadi error bila data yang ditampilkan melebihi ukuran layar melainkan akan menjadi bisa discroll
-
-        body: ListView(
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                ElevatedButton(
-                    onPressed: () => setState(() {
-                          widgets.add(Text(
-                            'data ke - ' + counter.toString(),
-                            style: TextStyle(fontSize: 35),
-                          ));
-                          counter++;
-                        }),
-                    child: Text('tambah data')),
-                ElevatedButton(
-                    onPressed: () => setState(() {
-                          widgets
-                              .removeLast(); // untuk menghapus widget terakhir
-                          counter--;
-                        }),
-                    child: Text('kurangi data'))
-              ],
+        body: Center(
+          child: GestureDetector(
+            onTap: () {
+              setState(() {});
+            },
+            onDoubleTap: () {
+              setState(() {
+                pesan = 'hello calon programer sukses :)';
+              });
+            },
+            onLongPress: () {
+              setState(() {
+                pesan = 'semoga sukses selalu :)';
+              });
+            },
+            child: AnimatedContainer(
+              duration: Duration(milliseconds: 700),
+              width: 50.0 + random.nextInt(201),
+              height: 50.0 + random.nextInt(201),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Color.fromARGB(255, random.nextInt(256),
+                    random.nextInt(256), random.nextInt(256)),
+              ),
+              child: Center(
+                child: Text(
+                  pesan,
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: widgets,
-            )
-          ],
+          ),
         ),
       ),
     );
@@ -91,5 +66,5 @@ class _MyAppState extends State<MyApp> {
 
 // penjelasan singkat
 // ----------------
-// gunakan List untuk menampung beberapa data sekaligus
-// gunakan ListView dari pada column/row untuk menghindari terjadinya error ketika data yang ditampilkan melebihi batas layar
+// widget GestureDetector berfungsi untuk mendeteksi sentuhan pada widget childnya, pada contoh diatas childnya adalah AnimatedContainer, dan pada saat disentuh maka akan menjalankan suatu method pada contoh diatas kita menggunakan onTap: () {setState(() {})} yang berarti kita akan merefresh halaman setiap kita klik, dan kita menggunakan onDoubleTap: akan mengubah pesan menjadi hello calon programer sukses, dan onLongPress: akan mengubah pesan menjadi semoga sukses selalu :)
+// widget AnimatedContainer merupakan containernya animasi yang akan diberikan pada nya. pada contoh diatas kita membuat sebuah animatedContainer ditengah2 layar yang nanti jika diklik nanti akan berubah warna dan ukuran panjang, tingginya secara random. kita menggunakan 50.0 untuk nilai minimal dan menggunakan random.nextInt(201) yang artinya kita akan menggenerate nilai antara nilai minimal hingga nilai 200. dan memiliki properti duration yang berisi durasi yang akan diberikan untuk melihat animasinya
