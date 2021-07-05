@@ -1,4 +1,4 @@
-// Latihan 11 - Stack & Align widget
+// Latihan 12 - Image widget
 
 import 'package:flutter/material.dart';
 
@@ -17,171 +17,39 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          appBar: AppBar(
-            title: Text(
-              'Latihan 11 - Stack & Align widget',
+        appBar: AppBar(
+          title: Text(
+            'Latihan 12 - Image widget',
+          ),
+        ),
+        body: Center(
+          child: Container(
+            // padding: EdgeInsets.all(4),
+            height: 300,
+            width: 300,
+            color: Colors.green,
+            //dibawah ini merupakan contoh menggunakan gambar dilokal / offline
+            // child: Image(
+            //   image: AssetImage('images/img.jpg'),
+            //   // fit: BoxFit.contain, //gambar(default) sesuai ukuran proposionalnya
+            //   // fit: BoxFit.cover,// memenuhin container dan gambar tetap proposional
+            //   // fit: BoxFit.fill, // memenuhin container dan gambar tidak proposional
+            //   // fit: BoxFit.fitHeight, // memenuhin ukuran tinggi container dan gambar tetap proposional
+            //   fit: BoxFit.fitWidth, // memenuhin ukuran lebar container dan gambar tetap proposional
+            // ),
+            child: Image(
+              image: NetworkImage(
+                  'https://cdn.idntimes.com/content-images/post/20171128/gunung6-67cf94043e5bed7288862eebd3d3c418.jpg'),
+              // fit: BoxFit.contain, //gambar(default) sesuai ukuran proposionalnya
+              // fit: BoxFit.cover,// memenuhin container dan gambar tetap proposional
+              // fit: BoxFit.fill, // memenuhin container dan gambar tidak proposional
+              // fit: BoxFit.fitHeight, // memenuhin ukuran tinggi dan gambar tetap proposionalcontainer
+              fit: BoxFit
+                  .fitHeight, // memenuhin ukuran lebar container dan gambar tetap proposional
             ),
           ),
-          body: Stack(
-            children: [
-              Column(
-                children: [
-                  Flexible(
-                      flex: 1,
-                      child: Row(
-                        children: [
-                          Flexible(
-                              flex: 1,
-                              child: Container(
-                                color: Colors.black26,
-                              )),
-                          Flexible(
-                              flex: 1,
-                              child: Container(
-                                color: Colors.orange,
-                              ))
-                        ],
-                      )),
-                  Flexible(
-                      flex: 1,
-                      child: Row(
-                        children: [
-                          Flexible(
-                              flex: 1,
-                              child: Container(
-                                color: Colors.orange,
-                              )),
-                          Flexible(
-                              flex: 1,
-                              child: Container(
-                                color: Colors.black26,
-                              ))
-                        ],
-                      )),
-                ],
-              ),
-              ListView(
-                children: [
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    child: Text(
-                      pesan,
-                      style: TextStyle(fontSize: 19, color: Colors.white),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    child: Text(
-                      pesan,
-                      style: TextStyle(fontSize: 19, color: Colors.white),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    child: Text(
-                      pesan,
-                      style: TextStyle(fontSize: 19, color: Colors.white),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    child: Text(
-                      pesan,
-                      style: TextStyle(fontSize: 19, color: Colors.white),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    child: Text(
-                      pesan,
-                      style: TextStyle(fontSize: 19, color: Colors.white),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    child: Text(
-                      pesan,
-                      style: TextStyle(fontSize: 19, color: Colors.white),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    child: Text(
-                      pesan,
-                      style: TextStyle(fontSize: 19, color: Colors.white),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    child: Text(
-                      pesan,
-                      style: TextStyle(fontSize: 19, color: Colors.white),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    child: Text(
-                      pesan,
-                      style: TextStyle(fontSize: 19, color: Colors.white),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    child: Text(
-                      pesan,
-                      style: TextStyle(fontSize: 19, color: Colors.white),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    child: Text(
-                      pesan,
-                      style: TextStyle(fontSize: 19, color: Colors.white),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    child: Text(
-                      pesan,
-                      style: TextStyle(fontSize: 19, color: Colors.white),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    child: Text(
-                      pesan,
-                      style: TextStyle(fontSize: 19, color: Colors.white),
-                    ),
-                  )
-                ],
-              ),
-              Align(
-                // alignment: Alignment.bottomCenter,
-                alignment: Alignment(0, 0.78),
-                child: Container(
-                  child: ElevatedButton(
-                      onLongPress: () {
-                        setState(() {
-                          pesan =
-                              'tetap semangat dalam mengejar mimpimu wahai calon programmer sukses dunia akhirat :)';
-                        });
-                      },
-                      onPressed: () {
-                        setState(() {
-                          pesan =
-                              'jangan bandingkan dirimu dengan orang lain tapi bandingkanlah dirimu dengan dirimu yang dahulu :)';
-                        });
-                      },
-                      child: Text(
-                        'pesan baru untukmu!',
-                        style: TextStyle(
-                          fontSize: 20,
-                        ),
-                      )),
-                ),
-              )
-            ],
-          )),
+        ),
+      ),
     );
   }
 }
@@ -189,15 +57,6 @@ class _MyAppState extends State<MyApp> {
 
 // penjelasan singkat
 // ----------------
-// berbeda dengan widget row yang menghasilkan widget lainya akan sejajar secara horizontal dan widget column secara vertikal, Widget Stack akan sejajar secara bertumpuk ke sumbu Z (dari bawah sampe atas) 
-// widget Align berfungsi untuk mengatur sebuah tataletak suatu widget yang ada dialamnya. dan mempunyai property alignment yang dapat berisi :
-// - Alignment(x, y), x terdiri nilai dari -1 sampai 1 yang berarti kalo -1 itu artinya letaknya ada di sebelah kiri, 0 untuk tengah, dan 1 untuk kanan. y pun demikian kalo -1 itu atas, 0 itu tengah dan 1 itu bawah
-// - Alignment.bottomCenter, letaknya tengah bawah
-// - Alignment.bottomRight, letaknya kanan bawah
-// - Alignment.bottomLeft, letaknya kiri bawah
-// - Alignment.center, letaknya tengah tengah
-// - Alignment.centerRight, letaknya kanan tengah
-// - Alignment.centerLeft, letaknya kiri tengah
-// - Alignment.topCenter, letaknya atas tengah
-// - Alignment.topLeft, letaknya atas kiri
-// - Alignment.topRight, letaknya atas kanan
+// widget Image berguna untuk menampilkan sebuah gambar.
+// gambarnya bisa dari lokal(offline) maupun online, jika gambarnya lokal kita perlu mendaftarkanya pada pubspec.yaml (lihat filenya). jika sudah didaftarkan kita bisa memanggilnya dengan property image: AssetImage('lokasiGambarmu.jpg'), kalo online kita bisa menggunakan property image: NetworkImage('www.linkGambarOnlineMu.jpg')
+// widget image juga punya beberapa property seperti fit. lihat saja kode diatas
