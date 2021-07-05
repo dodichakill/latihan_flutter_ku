@@ -1,65 +1,63 @@
-// latihan 6 - Anonymous Method
+// latihan 7 - TextStyle
 
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  int number = 0;
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Latihan 6 - Anonymous Method'),
+          title: Text('Latihan 7 - TextStyle'),
         ),
-        body: Container(
-          margin: EdgeInsets.fromLTRB(10, 120, 10, 0),
-          height: 400,
-          width: 400,
-          decoration: BoxDecoration(
-            color: Colors.tealAccent,
-            borderRadius: BorderRadius.circular(40),
-          ),
-          child: Center(
-            child: Column(
-              mainAxisAlignment:
-                  MainAxisAlignment.center, //menengahkan isi secara vertikal
+        body: Center(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(number.toString()),
-                ElevatedButton(
-                  // dibawah ini merupakan contoh anonymous method menggunakan arrow function
-                  onPressed: () => setState(() => number += 1),
-                  child: Text('( + ) bilangan'),
+                Text(
+                  'ini text dengan font poppins regular',
+                  style: TextStyle(
+                    fontFamily: "Poppins",
+                    fontSize: 20,
+                    decoration: TextDecoration.overline,
+                    decorationColor: Colors.green,
+                    decorationThickness: 4,
+                    decorationStyle: TextDecorationStyle.dashed,
+                  ),
                 ),
-                ElevatedButton(
-                  child: Text('( - ) bilangan'),
-                  // dibawah ini menggunakan anonymous method tanpa arrow function
-                  onPressed: () {
-                    setState(() {
-                      number -= 1;
-                    });
-                  },
-                )
-              ],
-            ),
-          ),
+                Text(
+                  'ini text dengan font poppins italic',
+                  style: TextStyle(
+                    fontFamily: "Poppins",
+                    fontSize: 20,
+                    decoration: TextDecoration.lineThrough,
+                    decorationColor: Colors.green,
+                    decorationThickness: 4,
+                    fontStyle: FontStyle.italic,
+                    decorationStyle: TextDecorationStyle.dotted,
+                  ),
+                ),
+                Text(
+                  'ini text dengan font poppins bold',
+                  style: TextStyle(
+                    fontFamily: "Poppins",
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    decoration: TextDecoration.underline,
+                    decorationColor: Colors.green,
+                    decorationThickness: 4,
+                    decorationStyle: TextDecorationStyle.double,
+                  ),
+                ),
+              ]),
         ),
       ),
     );
   }
 }
-
 // penjelasan singkat
 // ----------------
-// Anonymous method adalah method yang tidak mempunyai nama, anonymous method berfungsi untuk membuat sebuah method/function yang hanya dipakai sekali.
-// anonymous method bisa ditulis dengan langsung dengan parameter dan body nya contoh:
-// () { ... }
-// jika body codenya hanya sebaris maka kita bisa menggunakan arrow function/arrow fat seperti berikut:
-// () => ...
+// TextStyle merupakan widget yang berguna untuk styling text
+// jika kita ingin mencustom fonts sendiri kita bisa menambahkannya fontnya di folder/buat folder fonts lalu masukan font yang udah ditentukan/didownload ke dalam folder fonts, lalu kita daftarkan font tadi pada pubspec.yaml (lihat saja pada file pubspec.yaml), setelah didaftarkan fonts tersebut bisa digunakan dengan menggunakan widget TextStyle (dan beberapa styling) seperti contoh diatas.
