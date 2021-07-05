@@ -1,4 +1,4 @@
-// latihan 5 - Stateless & stateful widget
+// latihan 6 - Anonymous Method
 
 import 'package:flutter/material.dart';
 
@@ -11,24 +11,13 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int number = 0;
-  void tambahBilangan() {
-    setState(() {
-      number += 1;
-    });
-  }
-
-  void kurangBilangan() {
-    setState(() {
-      number -= 1;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('latihan 5 Stateful & Stateless widget'),
+          title: Text('Latihan 6 - Anonymous Method'),
         ),
         body: Container(
           margin: EdgeInsets.fromLTRB(10, 120, 10, 0),
@@ -45,12 +34,18 @@ class _MyAppState extends State<MyApp> {
               children: <Widget>[
                 Text(number.toString()),
                 ElevatedButton(
-                  onPressed: tambahBilangan,
-                  child: Text('tambah bilangan'),
+                  // dibawah ini merupakan contoh anonymous method menggunakan arrow function
+                  onPressed: () => setState(() => number += 1),
+                  child: Text('( + ) bilangan'),
                 ),
                 ElevatedButton(
-                  child: Text('kurangi bilangan'),
-                  onPressed: kurangBilangan,
+                  child: Text('( - ) bilangan'),
+                  // dibawah ini menggunakan anonymous method tanpa arrow function
+                  onPressed: () {
+                    setState(() {
+                      number -= 1;
+                    });
+                  },
                 )
               ],
             ),
@@ -63,8 +58,8 @@ class _MyAppState extends State<MyApp> {
 
 // penjelasan singkat
 // ----------------
-// Stateless widget merupakan widget yang tidak mempunyai state,
-// stateful widget merupakan widget yang mempunyai state,
-// state merupakan sebuah keadaan. contohnya air mempunyai 3 keadaan yaitu cair, beku, uap/gas dalam keadaan tertentu
-// dan untuk membuat state langsung menampilkan state terbaru maka state tersebut harus berada pada function setState(){}
-// dan diatas merupakan contoh dari stateful widget
+// Anonymous method adalah method yang tidak mempunyai nama, anonymous method berfungsi untuk membuat sebuah method/function yang hanya dipakai sekali.
+// anonymous method bisa ditulis dengan langsung dengan parameter dan body nya contoh:
+// () { ... }
+// jika body codenya hanya sebaris maka kita bisa menggunakan arrow function/arrow fat seperti berikut:
+// () => ...
