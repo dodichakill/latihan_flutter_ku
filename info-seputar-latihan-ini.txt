@@ -6,5 +6,5 @@ ketikan di terminal : flutter run
 ----
 file latihan fluter ini berbasis git, jadi satu project ini berisi banyak latihan, dan untuk melihatnya kita bisa mencheckout per bagian latihanya dengan git
 
-
+untuk melihat latihan apa saja anda pbisa ketik git log di terminal
 
