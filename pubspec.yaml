@@ -44,7 +44,7 @@ flutter:
   # To add Flutter specific assets to your application, add an assets section,
   # like this:
   assets:
-    - images/textures.png
+    - images/texture-kayu.jpg
     - images/img.jpg
     - images/fb.png
     - images/tw.png
