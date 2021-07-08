@@ -1,16 +1,22 @@
-// Latihan 22 - Opacity widget (Custom Card dengan background bercorak)
+// Latihan 23 - Positioned, FloatingActionButton widget
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:latihan_flutter_ku/main_page.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
+      (_) => runApp(MyApp())); //untuk mencegah aplikasi berorientasi landscape
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: MainPage());
+    return MaterialApp(
+        debugShowCheckedModeBanner: false, //menghilangkan banner debug
+        home: MainPage());
   }
 }
 // penjelasan singkat
 // ----------------
-// inkWell merupakan widget untuk membuat button sendiri dan memberikan efek sentuhan.
+// ada di kodenya

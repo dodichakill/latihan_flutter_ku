@@ -46,6 +46,9 @@ flutter:
   assets:
     - images/textures.png
     - images/img.jpg
+    - images/fb.png
+    - images/tw.png
+    - images/gl.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -59,14 +62,10 @@ flutter:
   # have a "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Poppins
-  #     fonts:
-  #       - asset: fonts/Poppins-Bold.ttf
-  #         weight: 700
-  #       - asset: fonts/Poppins-Regular.ttf
-  #       - asset: fonts/Poppins-italic.ttf
-  #         style: italic
+  fonts:
+    - family: Lobster
+      fonts:
+        - asset: fonts/Lobster.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
