@@ -1,68 +1,38 @@
-// Latihan 27 - mengcustom tampilan TabBar
+// Latihan 28 - menampilkan QR code
 
 import 'package:flutter/material.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 void main() => runApp(MyApp()); //untuk mencegah aplikasi berorientasi landscape
 
 class MyApp extends StatelessWidget {
-  TabBar myTabBar = TabBar(
-    // indicatorColor: Colors.blue, //berfungsi untuk mengubah warna indicator(garis bawah)
-
-    indicator: BoxDecoration(
-      color: Colors.purple,
-      border: Border(
-          top:
-              BorderSide(color: Colors.white, width: 5) //memberikan border atas
-          ),
-    ),
-    tabs: [
-      //berisi beberapa tab dan isi dari tabnya bebas
-      Tab(
-        icon: Icon(Icons.album_rounded),
-        text: ('album'),
-      ),
-      Tab(
-        icon: Icon(Icons.computer),
-        child: Text('News'),
-      ),
-    ],
-  );
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text(
-              'Latihan 27 - mengcustom tampilan TabBar',
-              style: TextStyle(fontSize: 15.5),
-            ),
-            bottom: PreferredSize(
-                preferredSize: Size.fromHeight(myTabBar.preferredSize
-                    .height), //berfungsi untuk mengetahui tinggi secara otomatis dari myTabBar
-                child: Container(
-                  child: myTabBar,
-                  color: Colors.green,
-                )),
-          ),
-          body: TabBarView(
-            //untuk menambahkan data pada setiap tab dan dapat langsung dilihat
-            children: [
-              Center(
-                child: Text('isi data dari tab 1'),
-              ),
-              Center(
-                child: Text('isi data dari tab 2'),
-              ),
-            ],
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Latihan 28 - menampilkan QR code'),
+        ),
+        body: Center(
+          child: QrImage(
+            version:
+                6, //defaultnya 4 (pelajari tentang version : www.qrcode.com/en/about/version.html)
+            backgroundColor: Colors.grey[300], //warna latar belakang
+            foregroundColor: Colors.black, //warna latar depan (balok2)
+            errorCorrectionLevel:
+                QrErrorCorrectLevel.M, //tingkat level koreksi error
+            padding: EdgeInsets.all(15), //menambakan padding
+            size: 300, //ukuranya w:300 h:300
+            data:
+                'https://buildtwithangga.com/', // data (link) yang bisa kita isi
           ),
         ),
       ),
     );
   }
 }
+
 // penjelasan singkat
 // ----------------
-// ada di kodenya
+// untuk menggunakan QR code kita harus menginstallnya di pubspec.yaml dengan ketik qr_flutter dan menuliskan versinya (lihat saja pada berkas pubspec.yaml)
+// untuk penjelasan lainya ada di kode diatas
