@@ -1,7 +1,7 @@
-// Latihan 31 - Playing music (memainkan musik)
+// Latihan 32 - Scan QR code
 
 import 'package:flutter/material.dart';
-import 'package:audioplayers/audioplayers.dart';
+import 'package:qrscan/qrscan.dart' as scanner;
 
 void main() => runApp(MyApp()); //untuk mencegah aplikasi berorientasi landscape
 
@@ -11,71 +11,29 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String durasi = '00:00:00';
-  AudioPlayer audioPlayer;
-
-  _MyAppState() {
-    audioPlayer = AudioPlayer();
-    audioPlayer.onAudioPositionChanged.listen((duration) {
-      setState(() {
-        durasi = duration.toString();
-      });
-    });
-    audioPlayer.setReleaseMode(ReleaseMode.LOOP);
-  }
-
-  void playSound(String url) async {
-    await audioPlayer.play(url);
-  }
-
-  void pauseSound() async {
-    await audioPlayer.pause();
-  }
-
-  void stopSound() async {
-    await audioPlayer.stop();
-  }
-
-  void resumeSound() {
-    audioPlayer.resume();
-  }
+  String text = 'Hasil QR Scan';
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
           appBar: AppBar(
-            title: Text('Latihan 31 - Playing music'),
+            title: Text('Latihan 32 - Scan QR code'),
           ),
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                Text(text),
+                SizedBox(
+                  height: 20,
+                ),
                 ElevatedButton(
-                    onPressed: () {
-                      playSound(
-                          'http://stream.ca.morow.com:8000/morow_med.mp3');
+                    onPressed: () async {
+                      text = await scanner.scan();
+                      setState(() {});
                     },
-                    child: Text('play')),
-                ElevatedButton(
-                    onPressed: () {
-                      pauseSound();
-                    },
-                    child: Text('pause')),
-                ElevatedButton(
-                    onPressed: () {
-                      resumeSound();
-                    },
-                    child: Text('resume')),
-                ElevatedButton(
-                    onPressed: () {
-                      stopSound();
-                    },
-                    child: Text('stop')),
-                Text(
-                  durasi,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                )
+                    child: Text('Scan'))
               ],
             ),
           )),
@@ -85,4 +43,5 @@ class _MyAppState extends State<MyApp> {
 
 // penjelasan singkat
 // ----------------
-// audioplayers: ^0.13.0
+// kita perlu memasang qrscan pada pubspec.yaml.
+// diatas merupakan contoh cara penggunannya sederhananya

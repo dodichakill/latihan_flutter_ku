@@ -23,8 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  audioplayers: ^0.13.0
   cupertino_icons: ^1.0.0
+  qrscan: ^0.3.2
 
 dev_dependencies:
   flutter_test:
