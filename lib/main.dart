@@ -1,7 +1,7 @@
-// Latihan 28 - menampilkan QR code
+// Latihan 29 - Transform widget (membuat custom button belah ketupat)
 
 import 'package:flutter/material.dart';
-import 'package:qr_flutter/qr_flutter.dart';
+import 'package:latihan_flutter_ku/colorful_button.dart';
 
 void main() => runApp(MyApp()); //untuk mencegah aplikasi berorientasi landscape
 
@@ -11,22 +11,33 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Latihan 28 - menampilkan QR code'),
+          title: Text('Latihan 29 - Transform Widget'),
         ),
         body: Center(
-          child: QrImage(
-            version:
-                6, //defaultnya 4 (pelajari tentang version : www.qrcode.com/en/about/version.html)
-            backgroundColor: Colors.grey[300], //warna latar belakang
-            foregroundColor: Colors.black, //warna latar depan (balok2)
-            errorCorrectionLevel:
-                QrErrorCorrectLevel.M, //tingkat level koreksi error
-            padding: EdgeInsets.all(15), //menambakan padding
-            size: 300, //ukuranya w:300 h:300
-            data:
-                'https://buildtwithangga.com/', // data (link) yang bisa kita isi
-          ),
-        ),
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.purple,
+                ),
+                padding: EdgeInsets.all(15),
+                child: Text(
+                  'membuat custom button belah ketupat',
+                  style: TextStyle(color: Colors.white),
+                )),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ColorfulButton(Colors.red, Colors.blue, Icons.adb),
+                ColorfulButton(Colors.amber, Colors.green, Icons.comment),
+                ColorfulButton(Colors.green, Colors.purple, Icons.computer),
+                ColorfulButton(Colors.blue, Colors.red, Icons.account_box),
+              ],
+            ),
+          ],
+        )),
       ),
     );
   }
@@ -34,5 +45,5 @@ class MyApp extends StatelessWidget {
 
 // penjelasan singkat
 // ----------------
-// untuk menggunakan QR code kita harus menginstallnya di pubspec.yaml dengan ketik qr_flutter dan menuliskan versinya (lihat saja pada berkas pubspec.yaml)
-// untuk penjelasan lainya ada di kode diatas
+// Widget Transform berguna untuk merubah suatu posisi objek. 
+// lihat penjelasan lainya di codenya
