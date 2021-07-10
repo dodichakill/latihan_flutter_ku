@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.0
+  http: ^0.12.0+2
 
 dev_dependencies:
   flutter_test:
@@ -60,15 +61,15 @@ flutter:
     - family: Lobster
       fonts:
         - asset: fonts/Lobster.ttf
-    - family: Gabriola
-      fonts:
-        - asset: fonts/Gabriola.ttf
-    - family: Milonga
-      fonts:
-        - asset: fonts/Milonga-Regular.ttf
-    - family: Cardo
-      fonts:
-        - asset: fonts/Cardo-Regular.ttf
+    # - family: Gabriola
+    #   fonts:
+    #     - asset: fonts/Gabriola.ttf
+    # - family: Milonga
+    #   fonts:
+    #     - asset: fonts/Milonga-Regular.ttf
+    # - family: Cardo
+    #   fonts:
+    #     - asset: fonts/Cardo-Regular.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
