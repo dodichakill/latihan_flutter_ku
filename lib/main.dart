@@ -1,7 +1,7 @@
-// Latihan 35 - HTTP Request (POST)
+// Latihan 36 - HTTP Request (GET)
 
 import 'package:flutter/material.dart';
-import 'package:latihan_flutter_ku/post_result_model.dart';
+import 'package:latihan_flutter_ku/get_user_model.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,22 +11,22 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  MyPostResult myPostResult = null; //nilai awal
+  User user = null; //nilai awal
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Latihan 35 - HTTP Request (POST)'),
+          title: Text('Latihan 36 - HTTP Request (GET)'),
         ),
         body: Center(
             child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(
-              (myPostResult != null)
-                  ? 'id : ${myPostResult.id} \n  name : ${myPostResult.name} \n  job : ${myPostResult.job} \n date : ${myPostResult.created}'
+              (user != null)
+                  ? 'id : ${user.id} \n  name : ${user.name}'
                   : "tidak ada data", // jika datanya berhasil terkirim maka akan memunculkan data dari server dan jika tidak berhasil maka akan menampilkan pesan tidak ada ada
               style: TextStyle(
                 color: Colors.blue,
@@ -38,12 +38,12 @@ class _MyAppState extends State<MyApp> {
             ),
             ElevatedButton(
                 onPressed: () {
-                  MyPostResult.connectToAPI('dodi', 'programmer').then((value) {
-                    myPostResult = value;
+                  User.connectToAPI('4').then((value) {
+                    user = value;
                     setState(() {});
-                  }); // disini kita memanggil API dan menambahkan sebuah data yang nanti akan kita tampilkan
+                  }); // disini kita memanggil API dan mengambil data dari id 4
                 },
-                child: Text('POST'))
+                child: Text('Get'))
           ],
         )),
       ),
