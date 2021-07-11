@@ -1,6 +1,7 @@
-// Latihan 39 - AnimatedPadding widget
+// Latihan 40 - Shared Preferences & Double Question Mark Operator (__)
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,107 +11,76 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  double myPadding = 5;
+  TextEditingController controller =
+      TextEditingController(text: 'no name'); //kondisi default TextField
+  bool isON = false; //kondisi tombol
+
+  void saveData() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setString('nama', controller.text);
+    pref.setBool('ison', isON);
+  } // berguna untuk menyimpan data yang telah dibuat
+
+  Future<String> getNama() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    return pref.getString('nama') ??
+        'no name'; //jika datanya tidak null maka tampilkan data nama jika tidak maka tampilkan 'no name'
+  } // berguna untuk mendapatkan data nama yang telah disimpan
+
+  Future<bool> getON() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    return pref.getBool('ison') ??
+        false; //jika datanya tidak null maka tampilkan data ison jika tidak tampilkan false
+  } // berguna untuk mendapatkan data isON yang telah disimpan
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
       appBar: AppBar(
-        title: Text('Latihan 39 - AnimatedPadding widget',
+        title: Text(
+            'Latihan 40 - Shared Preferences & Double Question Mark Operator (__)',
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 10,
             )),
       ),
       body: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-        Flexible(
-            flex: 1,
-            child: Row(
-              children: [
-                Flexible(
-                    flex: 1,
-                    child: AnimatedPadding(
-                      //untuk memberikan animasi padding pada childnya
-                      duration: Duration(seconds: 1),
-                      padding: EdgeInsets.all(myPadding),
-                      child: GestureDetector(
-                        //untuk membuat suatu event ketika diklik
-                        onTap: () {
-                          setState(() {
-                            myPadding = 10;
-                          });
-                        },
-                        child: Container(
-                          color: Colors.red,
-                        ),
-                      ),
-                    )),
-                Flexible(
-                    flex: 1,
-                    child: AnimatedPadding(
-                      //untuk memberikan animasi padding pada childnya
-                      duration: Duration(seconds: 1),
-                      padding: EdgeInsets.all(myPadding),
-                      child: GestureDetector(
-                        //untuk membuat suatu event ketika diklik
-                        onTap: () {
-                          setState(() {
-                            myPadding = 5;
-                          });
-                        },
-                        child: Container(
-                          color: Colors.green,
-                        ),
-                      ),
-                    ))
-              ],
-            )),
-        Flexible(
-            flex: 1,
-            child: Row(
-              children: [
-                Flexible(
-                    flex: 1,
-                    child: AnimatedPadding(
-                      //untuk memberikan animasi padding pada childnya
-                      duration: Duration(seconds: 1),
-                      padding: EdgeInsets.all(myPadding),
-                      child: GestureDetector(
-                        //untuk membuat suatu event ketika diklik
-                        onTap: () {
-                          setState(() {
-                            myPadding = 15;
-                          });
-                        },
-                        child: Container(
-                          color: Colors.blue,
-                        ),
-                      ),
-                    )),
-                Flexible(
-                    flex: 1,
-                    child: AnimatedPadding(
-                      //untuk memberikan animasi padding pada childnya
-                      duration: Duration(seconds: 1),
-                      padding: EdgeInsets.all(myPadding),
-                      child: GestureDetector(
-                        //untuk membuat suatu event ketika diklik
-                        onTap: () {
-                          setState(() {
-                            myPadding = 20;
-                          });
-                        },
-                        child: Container(
-                          color: Colors.amber,
-                        ),
-                      ),
-                    )),
-              ],
-            )),
+        Container(
+          margin: EdgeInsets.all(10),
+          child: TextField(
+            controller: controller,
+          ),
+        ),
+        Switch(
+            value: isON,
+            onChanged: (newValue) {
+              setState(() {
+                isON = newValue;
+              });
+            }),
+        ElevatedButton(
+            onPressed: () {
+              saveData(); //menjalankan perintah saveData
+            },
+            child: Text('Save')),
+        ElevatedButton(
+            onPressed: () {
+              getNama().then((s) {
+                controller.text = s;
+                setState(() {});
+              }); //menjalankan perintah getNama dan mengisi nilainya pada controller.text
+              getON().then((b) {
+                isON = b;
+                setState(() {});
+              });
+            },
+            child: Text('Load'))
       ]),
     ));
   }
 }
 // penjelasan singkat
 // ----------------
-// widget AnimatedSwitcher berfungsi untuk memberikan animasi padding pada suatu widget seperti container
-// diatas merupakan contoh penggunaanya
+// Shared Preferences berguna untuk menyimpan data yang tidak terlalu kompleks
+// sebelum menggunakannya pastikan shared_preferences sudah terdaftar pada pubspec.yaml
+// diatas merupakan contoh penerapannya
