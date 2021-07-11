@@ -1,7 +1,7 @@
-// Latihan 36 - HTTP Request (GET)
+// Latihan 37 - HTTP Request (GET) banyak data sekaligus
 
 import 'package:flutter/material.dart';
-import 'package:latihan_flutter_ku/get_user_model.dart';
+import 'package:latihan_flutter_ku/get_users_model.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,23 +11,24 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  User user = null; //nilai awal
+  String output = 'no data'; //nilai awal
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Latihan 36 - HTTP Request (GET)'),
+          title: Text('Latihan 37 - HTTP Request (GET) banyak data sekaligus',
+              style: TextStyle(
+                fontSize: 12,
+              )),
         ),
         body: Center(
             child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(
-              (user != null)
-                  ? 'id : ${user.id} \n  name : ${user.name}'
-                  : "tidak ada data", // jika datanya berhasil terkirim maka akan memunculkan data dari server dan jika tidak berhasil maka akan menampilkan pesan tidak ada ada
+              output,
               style: TextStyle(
                 color: Colors.blue,
                 fontSize: 19,
@@ -38,10 +39,14 @@ class _MyAppState extends State<MyApp> {
             ),
             ElevatedButton(
                 onPressed: () {
-                  User.connectToAPI('4').then((value) {
-                    user = value;
-                    setState(() {});
-                  }); // disini kita memanggil API dan mengambil data dari id 4
+                  User.getUsers('2').then((users) {
+                    output = '';
+                    for (int i = 0; i < users.length; i++) {
+                      output += '[ nama user: ${users[i].name} ]';
+                    }
+                  });
+                  setState(() {});
+                  // disini kita memanggil API dan mengambil data dari id 4
                 },
                 child: Text('Get'))
           ],

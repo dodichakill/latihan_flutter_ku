@@ -40,13 +40,13 @@ flutter:
 
   # To add Flutter specific assets to your application, add an assets section,
   # like this:
-  assets:
-    # - images/texture-kayu.jpg
-    - images/img.jpg
-    - images/img2.jpg
-    # - images/fb.png
-    # - images/tw.png
-    # - images/gl.png
+  # assets:
+  # - images/texture-kayu.jpg
+  # - images/img.jpg
+  # - images/img2.jpg
+  # - images/fb.png
+  # - images/tw.png
+  # - images/gl.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
