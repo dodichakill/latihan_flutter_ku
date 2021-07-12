@@ -1,86 +1,75 @@
-// Latihan 40 - Shared Preferences & Double Question Mark Operator (__)
+// Latihan 41 - Provider State Management
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
+import 'package:latihan_flutter_ku/application_color.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  TextEditingController controller =
-      TextEditingController(text: 'no name'); //kondisi default TextField
-  bool isON = false; //kondisi tombol
-
-  void saveData() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setString('nama', controller.text);
-    pref.setBool('ison', isON);
-  } // berguna untuk menyimpan data yang telah dibuat
-
-  Future<String> getNama() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    return pref.getString('nama') ??
-        'no name'; //jika datanya tidak null maka tampilkan data nama jika tidak maka tampilkan 'no name'
-  } // berguna untuk mendapatkan data nama yang telah disimpan
-
-  Future<bool> getON() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    return pref.getBool('ison') ??
-        false; //jika datanya tidak null maka tampilkan data ison jika tidak tampilkan false
-  } // berguna untuk mendapatkan data isON yang telah disimpan
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-      appBar: AppBar(
-        title: Text(
-            'Latihan 40 - Shared Preferences & Double Question Mark Operator (__)',
-            style: TextStyle(
-              fontSize: 10,
-            )),
-      ),
-      body: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-        Container(
-          margin: EdgeInsets.all(10),
-          child: TextField(
-            controller: controller,
+        home: ChangeNotifierProvider<ApplicationColor>(
+      builder: (context) =>
+          ApplicationColor(), // ini udah deprecated diaganti dengan dibawah ini (untuk sdk flutter versi 2.x.x)
+      // create: (BuildContext context) => ApplicationColor(),
+
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          title: Consumer<ApplicationColor>(
+            builder: (context, applicationColor, _) =>
+                Text('Latihan 41 - Provider State Management',
+                    style: TextStyle(
+                      color: applicationColor.color,
+                      fontSize: 18,
+                    )),
           ),
         ),
-        Switch(
-            value: isON,
-            onChanged: (newValue) {
-              setState(() {
-                isON = newValue;
-              });
-            }),
-        ElevatedButton(
-            onPressed: () {
-              saveData(); //menjalankan perintah saveData
-            },
-            child: Text('Save')),
-        ElevatedButton(
-            onPressed: () {
-              getNama().then((s) {
-                controller.text = s;
-                setState(() {});
-              }); //menjalankan perintah getNama dan mengisi nilainya pada controller.text
-              getON().then((b) {
-                isON = b;
-                setState(() {});
-              });
-            },
-            child: Text('Load'))
-      ]),
+        body: Center(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Consumer<ApplicationColor>(
+                  builder: (context, applicationColor, _) => AnimatedContainer(
+                      width: 100,
+                      height: 100,
+                      margin: EdgeInsets.all(5),
+                      color: applicationColor.color,
+                      duration: Duration(milliseconds: 500)),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(margin: EdgeInsets.all(5), child: Text('LG')),
+                    Consumer<ApplicationColor>(
+                        builder: (context, applicationColor, _) => Switch(
+                            value: applicationColor.isLightBlue,
+                            onChanged: (newValue) {
+                              applicationColor.isLightBlue = newValue;
+                            })),
+                    Container(margin: EdgeInsets.all(5), child: Text('LB')),
+                  ],
+                )
+              ]),
+        ),
+      ),
     ));
+
+    //   return MaterialApp(
+    //     home: Scaffold(
+    //       body: Center(
+    //         child: Text('tes'),
+    //       ),
+    //     ),
+    //   );
   }
 }
+
 // penjelasan singkat
 // ----------------
-// Shared Preferences berguna untuk menyimpan data yang tidak terlalu kompleks
-// sebelum menggunakannya pastikan shared_preferences sudah terdaftar pada pubspec.yaml
+// Provider State Management berguna untuk mengatur provider state (perubahan nilai pada widget tertentu saja dan nilai tersebut tersimpan di dalam shared state, shared state perlu mengimplement Change Notifier supaya ia dapat memberitahu pada element yang membutuhkan statenya) yang mempunyai ChangeNotifierProvider widget yang berguna untuk menyediakan objek dari shared state (instance). dan pada elemen/widget yang perlu berubah sesuai statenya harus di bungkus dengan widget Consumer yang berfungsi menandakan bahwa widget tersebut perlu diberitahu jika terjadi perubahan state yang bersangkutan. hal ini lebih efisien dari pada menggunakan setState() yang meredraw ulang seluruh komponen
+// sebelum menggunakannya pastikan provider sudah terdaftar pada pubspec.yaml
 // diatas merupakan contoh penerapannya
+// jika gagal dibuild itu karena versi sdk flutter ini menggunakan flutter versi 2.x.x , cobalah mengubah/downgrade/download ulang flutternya menjadi flutter versi 1.x.x
