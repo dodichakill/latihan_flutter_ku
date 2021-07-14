@@ -1,34 +1,20 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
 
-enum ColorEvent { to_amber, to_light_blue }
+enum ColorEvent { to_amber, to_green }
 
-class ColorBloc {
-  Color _color = Colors.amber; //nilai default
+class ColorBloc extends Bloc<ColorEvent, Color> {
+  Color _color = Colors.amber;
 
-  StreamController<ColorEvent> _eventController =
-      StreamController<ColorEvent>();
-  StreamSink<ColorEvent> get eventSink => _eventController.sink;
+  @override
+  Color get initialState => Colors.amber;
 
-  StreamController<Color> _stateController = StreamController<Color>();
-  StreamSink<Color> get _stateSink => _stateController.sink;
-  Stream<Color> get stateStream => _stateController.stream;
-
-  void _mapEventToState(ColorEvent colorEvent) {
-    if (colorEvent == ColorEvent.to_amber)
-      _color = Colors.amber;
-    else
-      _color = Colors.lightBlue;
-
-    _stateSink.add(_color);
-  }
-
-  ColorBloc() {
-    _eventController.stream.listen(_mapEventToState);
-  }
-
-  void dispose() {
-    _eventController.close();
-    _stateController.close();
+  @override
+  Stream<Color> mapEventToState(ColorEvent event) async* {
+    //mapEventToState berfungsi untuk memaping suatu state berdasarkan event
+    _color = (event == ColorEvent.to_amber) ? Colors.amber : Colors.green;
+    yield _color;
   }
 }
+
+//dengan menggunakan package bloc kita bisa menuliskan kodenya lebih ringkas seperti diatas
