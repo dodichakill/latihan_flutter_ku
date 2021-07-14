@@ -1,95 +1,98 @@
-// Latihan 45 - Doc Comment
+// Latihan 46 - Timer
+
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
-  final UserProfile profile = UserProfile(
-    name: 'nama saya dodi',
-    role: 'programmer sukses dunia akhirat',
-    imgURL: 'images/img.jpg',
-  );
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int counter = 0;
+  bool isBlack = true;
+  bool isStop = true;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Latihan 45 - Doc Comment'),
+          title: Text('Latihan 46 - Timer'),
         ),
         body: Center(
-          child: profile,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                counter.toString(),
+                style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+                    color: (isBlack) ? Colors.black : Colors.red),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    Timer(Duration(seconds: 5), () {
+                      // ini akan menjalankan perintahnya setelah 5 detik
+                      setState(() {
+                        isBlack = !isBlack;
+                      });
+                    });
+                  },
+                  child: Text('Ubah warna 5 detik kemudian')),
+              SizedBox(
+                height: 10,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    Timer.run(() {
+                      //method run berfungsi untuk menjalankan perubahan secara langsung
+                      setState(() {
+                        isBlack = !isBlack;
+                      });
+                    });
+                  },
+                  child: Text('Ubah warna secara langsung')),
+              SizedBox(
+                height: 10,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    counter = 0;
+                    isStop = false;
+                    Timer.periodic(Duration(seconds: 1), (timer) {
+                      if (isStop) {
+                        timer
+                            .cancel(); // akan membatalkan timer dan akan menghentikan proses timer
+                      }
+                      setState(() {
+                        counter++;
+                      });
+                    });
+                  },
+                  child: Text('Start Timer')),
+              SizedBox(
+                height: 10,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    isStop = true; // akan menghentikan timer
+                  },
+                  child: Text('Stop Timer')),
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-/// Class UserProfile digunakan untuk menampilkan user ke layar dengan sempurna
-class UserProfile extends StatelessWidget {
-  /// field ini digunakan untuk menyimpan nama user
-  final String name;
-
-  /// field ini digunakan untuk menyimpan role user
-  final String role;
-
-  /// field ini digunakan untuk menyimpan URL foto user
-  final String imgURL;
-
-  /// [name] berisi **nama user**. *Nilai defaultnya* adalah `No Name`
-  ///
-  /// [role] berisi **role user**. *Nilai defaultnya* adalah `No Role`
-  ///
-  /// [imgUrl] berisi URL gambar foto user. URL ini menggunakan assets offline
-  ///
-  /// contoh:
-  ///
-  /// ```
-  /// UserProfile(name:'dodi', role:'programmer sukses dunia akhirat', imgURL:'images/img.jpg');
-  ///
-  ///
-  /// ```
-  UserProfile({this.name = 'No Name', this.role = 'No Role', this.imgURL});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10), color: Colors.red),
-          child: Image(
-            image: AssetImage(
-                (imgURL != null) ? imgURL : 'images/texture-kayu.jpg'),
-            fit: BoxFit.cover,
-            width: 200,
-            height: 200,
-          ),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Text(
-          name,
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-        ),
-        SizedBox(
-          height: 5,
-        ),
-        Text(role)
-      ],
-    );
-  }
-}
-
 // penjelasan singkat
 // ----------------
-// pada materi kali ini kita akan belajar macam macam jenis doc comment (komentar dokumentasi) yang berguna untuk mengkomunikasikan kode kita kepada orang lain agar mudah dipahami. dan jika kita arahkan cursor pada suatu kodingan baik function/method/class atau lainya akan memunculkan suatu keterangan
-// tulis /// untuk memulai membuat doc comment / komentar dokumentasi
-// bungkus dengan * untuk membuat teksnya menjadi italic
-// bungkus dengan ** untuk membuat teksnya menjadi bold
-// bungkus dengan [ dan diakhiri ] untuk membuat teksnya menjadi menonjol
-// untuk membuat contoh kode bungkus dengan ``` pada awal dan akhir doc commentnya
-// untuk lihat bestpractice-nya bisa baca di artikel ini  https://dart.dev/guides/language/effective-dart/documentation
+// pada materi kali ini kita akan belajar Timer yaitu widget waktu yang bisa kita gunakan.
