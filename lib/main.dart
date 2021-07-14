@@ -1,119 +1,95 @@
-// Latihan 44 - BLoC State Management (flutter_bloc package)
-// tutorial dibawah ini tanpa library (BLoC plain)
+// Latihan 45 - Doc Comment
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:latihan_flutter_ku/color_bloc.dart';
 
 void main() => runApp(MyApp());
 
-// dibawah ini contoh tanpa penerapan Bloc State management
-
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       home: MainPage(),
-//     );
-//   }
-// }
-
-// class MainPage extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       floatingActionButton: Row(
-//         mainAxisAlignment: MainAxisAlignment.end,
-//         children: [
-//           FloatingActionButton(
-//             onPressed: () {},
-//             backgroundColor: Colors.amber,
-//           ),
-//           SizedBox(
-//             width: 10,
-//           ),
-//           FloatingActionButton(
-//             onPressed: () {},
-//             backgroundColor: Colors.green,
-//           ),
-//         ],
-//       ),
-//       appBar: AppBar(
-//         title:
-//             Text('Latihan 44 - BLoC State Management (flutter_bloc package)'),
-//       ),
-//       body: Center(
-//         child: AnimatedContainer(
-//           width: 100,
-//           height: 100,
-//           color: Colors.amber,
-//           duration: Duration(milliseconds: 500),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// dibawah ini contoh dengan penerapan Bloc State management
-
 class MyApp extends StatelessWidget {
+  final UserProfile profile = UserProfile(
+    name: 'nama saya dodi',
+    role: 'programmer sukses dunia akhirat',
+    imgURL: 'images/img.jpg',
+  );
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: BlocProvider<ColorBloc>(
-          builder: (context) => ColorBloc(), child: MainPage()),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Latihan 45 - Doc Comment'),
+        ),
+        body: Center(
+          child: profile,
+        ),
+      ),
     );
   }
 }
 
-class MainPage extends StatelessWidget {
+/// Class UserProfile digunakan untuk menampilkan user ke layar dengan sempurna
+class UserProfile extends StatelessWidget {
+  /// field ini digunakan untuk menyimpan nama user
+  final String name;
+
+  /// field ini digunakan untuk menyimpan role user
+  final String role;
+
+  /// field ini digunakan untuk menyimpan URL foto user
+  final String imgURL;
+
+  /// [name] berisi **nama user**. *Nilai defaultnya* adalah `No Name`
+  ///
+  /// [role] berisi **role user**. *Nilai defaultnya* adalah `No Role`
+  ///
+  /// [imgUrl] berisi URL gambar foto user. URL ini menggunakan assets offline
+  ///
+  /// contoh:
+  ///
+  /// ```
+  /// UserProfile(name:'dodi', role:'programmer sukses dunia akhirat', imgURL:'images/img.jpg');
+  ///
+  ///
+  /// ```
+  UserProfile({this.name = 'No Name', this.role = 'No Role', this.imgURL});
+
   @override
   Widget build(BuildContext context) {
-    ColorBloc bloc = BlocProvider.of<ColorBloc>(context);
-
-    return Scaffold(
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            onPressed: () {
-              bloc.dispatch(ColorEvent.to_amber);
-            },
-            backgroundColor: Colors.amber,
-          ),
-          SizedBox(
-            width: 10,
-          ),
-          FloatingActionButton(
-            onPressed: () {
-              bloc.dispatch(ColorEvent.to_green);
-            },
-            backgroundColor: Colors.green,
-          ),
-        ],
-      ),
-      appBar: AppBar(
-        title: Text(
-          'Latihan 44 - BLoC State Management (flutter_bloc package)',
-          maxLines: 3,
-          style: TextStyle(fontSize: 17),
-        ),
-      ),
-      body: Center(
-        child: BlocBuilder<ColorBloc, Color>(
-          builder: (context, currentColor) => AnimatedContainer(
-            width: 100,
-            height: 100,
-            color: currentColor,
-            duration: Duration(milliseconds: 500),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10), color: Colors.red),
+          child: Image(
+            image: AssetImage(
+                (imgURL != null) ? imgURL : 'images/texture-kayu.jpg'),
+            fit: BoxFit.cover,
+            width: 200,
+            height: 200,
           ),
         ),
-      ),
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+          name,
+          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(
+          height: 5,
+        ),
+        Text(role)
+      ],
     );
   }
 }
 
 // penjelasan singkat
 // ----------------
-// BLoC (Bussiness Logic Component) State Management, pada kali ini kita menggunakan library dari flutter_bloc dan pastikan itu sudah terdaftar pada pubspec.yaml
-// jika project ini error saat dirun itu berarti Flutter SDKnya versi 2.x.x untuk mengatasinya anda perlu mendowngrade menjadi versi 1.x.x
+// pada materi kali ini kita akan belajar macam macam jenis doc comment (komentar dokumentasi) yang berguna untuk mengkomunikasikan kode kita kepada orang lain agar mudah dipahami. dan jika kita arahkan cursor pada suatu kodingan baik function/method/class atau lainya akan memunculkan suatu keterangan
+// tulis /// untuk memulai membuat doc comment / komentar dokumentasi
+// bungkus dengan * untuk membuat teksnya menjadi italic
+// bungkus dengan ** untuk membuat teksnya menjadi bold
+// bungkus dengan [ dan diakhiri ] untuk membuat teksnya menjadi menonjol
+// untuk membuat contoh kode bungkus dengan ``` pada awal dan akhir doc commentnya
+// untuk lihat bestpractice-nya bisa baca di artikel ini  https://dart.dev/guides/language/effective-dart/documentation
